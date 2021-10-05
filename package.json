@@ -4,7 +4,11 @@
   "description": "Library for verifying, decoding and interpreting SmartFile's session key (JWT token).",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporters": ["json", "html"]
   },
   "repository": {
     "type": "git",
@@ -18,5 +22,8 @@
   "homepage": "https://github.com/smartfile/node-session-jwt#readme",
   "dependencies": {
     "bitset": "^5.1.1"
+  },
+  "devDependencies": {
+    "jest": "^27.2.4"
   }
 }
