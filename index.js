@@ -26,10 +26,35 @@ const RIGHTS = [
   'default_link_access',
 ];
 
-function hasRight(name, bitmask) {
+const FEATURES = [
+  'newui',
+  'smb',
+  'activity',
+  'versioning',
+  'automation',
+  'ftp',
+  'newfs',
+  'logaccess',
+  'gdrive',
+  'connectoradmin',
+  'databasefs',
+  'filehubpaired',
+  'adminview',
+  'trashbin',
+  'ldap_sync',
+  'ldap_auth',
+  'custom_domain',
+  'trashbin_age',
+  'twofa',
+  'signatures',
+  'extended_activity',
+  'vue_ui',
+];
+
+function hasItem(name, bitmask, list) {
   let success = false;
 
-  RIGHTS.forEach((right, index) => {
+  list.forEach((right, index) => {
     if (right === name) {
       success = Boolean(new BitSet(bitmask).get(index));
     }
@@ -38,11 +63,25 @@ function hasRight(name, bitmask) {
   return success;
 }
 
+function hasFeature(name, bitmask) {
+  return hasItem(name, bitmask, FEATURES);
+}
+
+function hasFeatures(features, bitmask) {
+  return features.every((feature) => hasFeature(feature, bitmask));
+}
+
+function hasRight(name, bitmask) {
+  return hasItem(name, bitmask, RIGHTS);
+}
+
 function hasRights(rights, bitmask) {
   return rights.every((right) => hasRight(right, bitmask));
 }
 
 module.exports = {
+  hasFeature,
+  hasFeatures,
   hasRight,
   hasRights,
 };
